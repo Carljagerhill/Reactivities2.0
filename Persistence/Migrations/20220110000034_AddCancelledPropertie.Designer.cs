@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220110000034_AddCancelledPropertie")]
+    partial class AddCancelledPropertie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,15 +55,15 @@ namespace Persistence.Migrations
                     b.Property<string>("AppUserId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("ActivityId")
+                    b.Property<Guid>("ActvityId")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsHost")
+                    b.Property<bool>("isHost")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("AppUserId", "ActivityId");
+                    b.HasKey("AppUserId", "ActvityId");
 
-                    b.HasIndex("ActivityId");
+                    b.HasIndex("ActvityId");
 
                     b.ToTable("ActivityAttendees");
                 });
@@ -268,7 +270,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Activity", "Activity")
                         .WithMany("Attendees")
-                        .HasForeignKey("ActivityId")
+                        .HasForeignKey("ActvityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
